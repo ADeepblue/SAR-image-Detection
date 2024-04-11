@@ -1,7 +1,7 @@
 % 第二步：对两幅图像进行相干波滤波（Lee滤波）  
 %Lee滤波
 close all;
-clear all;
+clear;
 clc;
 IMAGE=imread('yellow_C_1.bmp');
 figure();
