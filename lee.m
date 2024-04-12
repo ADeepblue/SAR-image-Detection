@@ -15,12 +15,12 @@ for i=floor(WL/2)+1 : m-floor(WL/2) %WL*WL滤波
         %取窗口的数据
         [k,p]=size(Window);
         Temp=reshape(Window,1,k*p);
-        u_y=mean(Temp);
-        var_y=std2(Temp)*std2(Temp);
-        var_x=(var_y-u_y*u_y)/2;
-        a=1-var_x/var_y;
-        b=var_x/var_y;
-        IMAGE_filtered(i-floor(WL/2)+1,j-floor(WL/2)+1)=u_y+b*(IMAGE(i,j)-u_y);
+        Average=mean(Temp);
+        SD2=std2(Temp)*std2(Temp);
+        var_x=(SD2-Average*Average)/2;
+        a=1-var_x/SD2;
+        b=var_x/SD2;
+        IMAGE_filtered(i-floor(WL/2)+1,j-floor(WL/2)+1)=Average+b*(IMAGE(i,j)-Average);
     end
 end
 IMAGE_filtered=IMAGE_filtered/max(max(IMAGE_filtered));
@@ -78,12 +78,12 @@ for i=floor(WL/2)+1 : m-floor(WL/2) %WL*WL滤波
        end
        [k,p]=size(WindowPart);
        Temp=reshape(WindowPart,1,k*p);
-       u_y=mean(Temp);
-       var_y=std2(Temp)*std2(Temp);
-       var_x=(var_y-u_y*u_y)/2;
-       a=1-var_x/var_y;
-       b=var_x/var_y;
-       IMAGE_filtered_RL(i-floor(WL/2)+1,j-floor(WL/2)+1)=u_y+b*(IMAGE(i,j)-u_y);%精致Lee滤波后的图像
+       Average=mean(Temp);
+       SD2=std2(Temp)*std2(Temp);
+       var_x=(SD2-Average*Average)/2;
+       a=1-var_x/SD2;
+       b=var_x/SD2;
+       IMAGE_filtered_RL(i-floor(WL/2)+1,j-floor(WL/2)+1)=Average+b*(IMAGE(i,j)-Average);%精致Lee滤波后的图像
     end
 end
 IMAGE_filtered_RL=IMAGE_filtered_RL/max(max(IMAGE_filtered_RL));

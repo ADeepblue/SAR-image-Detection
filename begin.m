@@ -1,7 +1,7 @@
 clc,close all
 clear
-cd SARImageFile\
-cd SARImageData\
+cd SARImageFile\SARImageData\
+
 FixedImage = imread('1999.04.bmp');
 MovingImage = imread("1999.05.bmp");
 
@@ -32,6 +32,5 @@ figure
 imshow(uint8(registeredImage));
 title("registeredImage")
 
-cd ..
-cd ..
+cd ..\..
 
