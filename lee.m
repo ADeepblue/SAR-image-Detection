@@ -1,10 +1,12 @@
 %% 第二步：对两幅图像进行相干波滤波（Lee滤波）  
 %Lee滤波
 
+
+
 close all;
 clear;
 clc;
-cd SARImageFile\SARImageData\
+% cd SARImageFile\SARImageData\
 IMAGE=imread('yellow_C_1.bmp');
 figure();
 imshow(IMAGE);title('原图');

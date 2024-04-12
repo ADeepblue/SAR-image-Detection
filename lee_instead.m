@@ -3,9 +3,9 @@
 
 clc,clear,close all
 
-cd SARImageFile\SARImageData\
+% cd SARImageFile\SARImageData\
 
-Image = imread("B1.tif");
+Image = imread("yellow_C_1.bmp");
 
 figure
 imshow(Image);
@@ -44,5 +44,6 @@ title("Lee filter")
 
 %% Fine WaveFiltering
 
+windowlength = 7;
 
 
