@@ -1,8 +1,10 @@
-% 第二步：对两幅图像进行相干波滤波（Lee滤波）  
+%% 第二步：对两幅图像进行相干波滤波（Lee滤波）  
 %Lee滤波
+
 close all;
 clear;
 clc;
+cd SARImageFile\SARImageData\
 IMAGE=imread('yellow_C_1.bmp');
 figure();
 imshow(IMAGE);title('原图');
@@ -27,7 +29,11 @@ IMAGE_filtered=IMAGE_filtered/max(max(IMAGE_filtered));
 IMAGE_filtered=imadjust(IMAGE_filtered,stretchlim(IMAGE_filtered),[],1);
 figure();
 imshow(IMAGE_filtered);title('Lee滤波图');
-%Lee精致滤波
+
+
+
+%% Lee精致滤波
+
 WL=7;%精致Lee一般采用7*7的窗口
 M=zeros(3,3);
 IMAGE_filtered_RL=zeros(m-floor(WL/2),n-floor(WL/2));
