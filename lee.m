@@ -34,6 +34,10 @@ imshow(IMAGE_filtered);title('Lee滤波图');
 
 %% Lee精致滤波
 
+tic
+
+clc,clear,close all
+
 IMAGE=imread('yellow_C_1.bmp');
 [l,w]=size(IMAGE);
 WL=7;%精致Lee一般采用7*7的窗口
@@ -120,3 +124,5 @@ for i=1:l-WL
 end
 ESI_L=sum_L/sum_o;%Lee滤波后图像的边缘保持指数
 ESI_RL=sum_RL/sum_o;%精致Lee滤波后图像的边缘保持指数
+
+toc

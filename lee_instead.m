@@ -138,5 +138,8 @@ end
 
 clear tempindex1 tempindex2 tempindex
 
+figure
+imshow(uint8(Image_Fine_Filtered))
+title("Fine WaveFiltering")
 
-
+    
