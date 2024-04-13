@@ -43,7 +43,6 @@ title("Lee filter")
 
 %% Fine WaveFiltering
 
-windowlength = 7;
 Image_Fine_Filtered = zeros(l-Onesidelength,w-Onesidelength);
 Core1 = [-1,0,1;
          -1,0,1;
@@ -61,4 +60,19 @@ Core4 =[1,1,0;
         1,0,-1;
        0,-1,-1];
 
+for index1 = 1+Onesidelength:l-Onesidelength
+    for index2 = 1+Onesidelength:w-Onesidelength
+        temp_window = Image(index1-Onesidelength:index1+Onesidelength,...
+            index2-Onesidelength:index2+Onesidelength);
 
+        M = zeros(3,3);
+        for tempindex1 = 1:3
+            for tempindex2 = 1:3
+                M(tempindex1,tempindex2) = ...
+                    mean(reshape(temp_window(2*tempindex1-1:2*tempindex1+1,2*tempindex2-1:2*tempindex2+1),1,[]));
+            end
+        end
+
+        
+    end
+end

@@ -8,11 +8,11 @@ clc;
 IMAGE=imread('yellow_C_1.bmp');
 figure();
 imshow(IMAGE);title('原图');
-[m,n]=size(IMAGE);
+[l,w]=size(IMAGE);
 WL=7;%Lee滤波的窗长
-IMAGE_filtered=zeros(m-floor(WL/2),n-floor(WL/2));
-for i=floor(WL/2)+1 : m-floor(WL/2) %WL*WL滤波
-    for j=floor(WL/2)+1 : n-floor(WL/2)
+IMAGE_filtered=zeros(l-floor(WL/2),w-floor(WL/2));
+for i=floor(WL/2)+1 : l-floor(WL/2) %WL*WL滤波
+    for j=floor(WL/2)+1 : w-floor(WL/2)
         Window=IMAGE(i-floor(WL/2) : i+floor(WL/2),j-floor(WL/2) : j+floor(WL/2));
         %取窗口的数据
         [k,p]=size(Window);
@@ -36,14 +36,14 @@ imshow(IMAGE_filtered);title('Lee滤波图');
 
 WL=7;%精致Lee一般采用7*7的窗口
 M=zeros(3,3);
-IMAGE_filtered_RL=zeros(m-floor(WL/2),n-floor(WL/2));
+IMAGE_filtered_RL=zeros(l-floor(WL/2),w-floor(WL/2));
 G1=[-1 0 1;-1 0 1;-1 0 1];%垂直模板
 G2=[0 1 1;-1 0 1;-1 -1 0];%135度模板
 G3=[1 1 1;0,0,0;-1 -1 -1];%水平模板
 G4=[1 1 0;1 0 -1;0 -1 -1];%45度模板
 GV=zeros(1,4);
-for i=floor(WL/2)+1 : m-floor(WL/2) %WL*WL滤波
-    for j=floor(WL/2)+1 : n-floor(WL/2)
+for i=floor(WL/2)+1 : l-floor(WL/2) %WL*WL滤波
+    for j=floor(WL/2)+1 : w-floor(WL/2)
        Window=IMAGE(i-floor(WL/2):i+floor(WL/2),j-floor(WL/2):j+floor(WL/2));
        %去窗口中的数据
        M(1,1)=mean(mean(Window(1:3,1:3)));
@@ -109,8 +109,8 @@ ENL_RL=u_RL^2/var_RL;%精致滤波后图像的等效视数
 sum_L=0;
 sum_o=0;
 sum_RL=0;
-for i=1:m-WL
-    for j=1:n-WL
+for i=1:l-WL
+    for j=1:w-WL
         sum_L=sum_L+abs(abs(IMAGE_filtered(i,j)-IMAGE_filtered(i+1,j))+abs(IMAGE_filtered(i,j)-IMAGE_filtered(i,j+1)));
         sum_RL=sum_RL+abs(abs(IMAGE_filtered_RL(i,j)-IMAGE_filtered_RL(i+1,j))+abs(IMAGE_filtered_RL(i,j)-IMAGE_filtered_RL(i,j+1)));
         sum_o=sum_o+abs(abs(IMAGE(i+floor(WL/2),j+floor(WL/2))-IMAGE(i+floor(WL/2)+1,j+floor(WL/2)))+abs(IMAGE(i+floor(WL/2),j+floor(WL/2))-IMAGE(i+floor(WL/2),j+floor(WL/2)+1)));
