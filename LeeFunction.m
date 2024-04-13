@@ -4,10 +4,6 @@ function [Image_Cofiltered] = LeeFunction(ImagePath)
 
 Image = imread(ImagePath);
 
-figure
-imshow(Image);
-title("origin Image")
-
 [l,w,~]=size(Image);
 
 windowlength = 7; %must be a single num
