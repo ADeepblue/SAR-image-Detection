@@ -10,11 +10,11 @@ figure
 imshow(Image);
 title("origin Image")
 
-[l,w,d]=size(Image);
+[l,w,~]=size(Image);
 
 windowlength = 7; %must be a single num
 Onesidelength = floor(windowlength/2);
-Image_COfiltered = zeros(l-Onesidelength,w-Onesidelength);
+Image_Cofiltered = zeros(l-2*Onesidelength,w-2*Onesidelength);
 
 Border = 2*Onesidelength;
 
@@ -30,14 +30,14 @@ for index1 = 1:(l-2*Onesidelength)
         %b = (SD^2-Average^2)/(2*SD^2);
         b = 1/2 - (Average/SD)^2/2;
 
-        Image_COfiltered(index1,index2) = Average + b ...
+        Image_Cofiltered(index1,index2) = Average + b ...
         * (Image(index1+Onesidelength,index2+Onesidelength)-Average);
 
     end
 end
 
 figure
-imshow(uint8(Image_COfiltered))
+imshow(uint8(Image_Cofiltered))
 title("Lee filter")
 
 
@@ -47,10 +47,12 @@ clc,clear,close all
 % cd SARImageFile\SARImageData\
 
 Image = imread("yellow_C_1.bmp");
+[l,w,~]=size(Image);
+
 windowlength = 7;
 Onesidelength = floor(windowlength/2); 
 
-Image_Fine_Filtered = zeros(l-Onesidelength,w-Onesidelength);
+Image_Fine_Filtered = zeros(l-2*Onesidelength,w-2*Onesidelength);
 Core1 = [-1,0,1;
          -1,0,1;
          -1,0,1];
@@ -67,7 +69,11 @@ Core4 =[1,1,0;
         1,0,-1;
        0,-1,-1];
 
-CoreTotal = [Core1;Core2;Core3;Core4];
+CoreTotal = zeros(3,3,3);
+CoreTotal(1,:,:)=Core1;
+CoreTotal(2,:,:)=Core2;
+CoreTotal(3,:,:)=Core3;
+CoreTotal(4,:,:)=Core4;
 
 GV = linspace(0,0,4);
 for index1 = 1+Onesidelength:l-Onesidelength
@@ -117,9 +123,20 @@ for index1 = 1+Onesidelength:l-Onesidelength
                 end
         end
         
+        temp_window = temp_window(:);
+        Average = mean(temp_window);
+        SD = std2(temp_window);
+        
+        % a = 1-(SD2-Average^2)/(2*SD2);
+        % a = 1/2 + (Average/SD)^2/2;
+        
+        b = (SD^2-Average^2)/(2*SD^2);
+        Image_Fine_Filtered(index1-Onesidelength,index2-Onesidelength) = ...
+            Average+b * (Image(index1,index2)-Average);
     end
 end
 
 clear tempindex1 tempindex2 tempindex
+
 
 

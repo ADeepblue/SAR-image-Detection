@@ -34,6 +34,8 @@ imshow(IMAGE_filtered);title('Lee滤波图');
 
 %% Lee精致滤波
 
+IMAGE=imread('yellow_C_1.bmp');
+[l,w]=size(IMAGE);
 WL=7;%精致Lee一般采用7*7的窗口
 M=zeros(3,3);
 IMAGE_filtered_RL=zeros(l-floor(WL/2),w-floor(WL/2));
