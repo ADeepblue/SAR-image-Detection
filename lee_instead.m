@@ -6,9 +6,9 @@ clc,clear,close all
 
 Image = imread("SARImageFile\FilterImageFile\registerbeijing.jpg");
 
-figure
-imshow(Image);
-title("origin Image")
+% figure
+% imshow(Image);
+% title("origin Image")
 
 [l,w,~]=size(Image);
 
@@ -36,10 +36,11 @@ for index1 = 1:(l-2*Onesidelength)
     end
 end
 
-figure
-imshow(uint8(Image_Cofiltered))
-title("Lee filter")
+% figure
+% imshow(uint8(Image_Cofiltered))
+% title("Lee filter")
 
+imwrite(uint8(Image_Cofiltered),"SARImageFile\FilterImageFile\leefilterbeijing.jpg")
 
 %% Fine WaveFiltering
 
