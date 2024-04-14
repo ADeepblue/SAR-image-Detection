@@ -4,7 +4,7 @@ clc,clear,close all
 
 % cd SARImageFile\SARImageData\
 
-Image = imread("yellow_C_1.bmp");
+Image = imread("SARImageFile\FilterImageFile\registerbeijing.jpg");
 
 figure
 imshow(Image);
