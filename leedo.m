@@ -1,10 +1,12 @@
 %% corase Wavefiltering
 
+tic
+
 clc,clear,close all
 
 % cd SARImageFile\SARImageData\
 
-Image = imread("SARImageFile\FilterImageFile\registerbeijing.jpg");
+Image = imread("SARImageFile\FilterImageFile\registerbeijing_A_1.jpg");
 Image = rgb2gray(Image);
 % figure
 % imshow(Image);
@@ -40,4 +42,5 @@ end
 % imshow(uint8(Image_Cofiltered))
 % title("Lee filter")
 
-imwrite(uint8(Image_Cofiltered),"SARImageFile\FilterImageFile\leefilterbeijing.jpg")
+imwrite(uint8(Image_Cofiltered),"SARImageFile\FilterImageFile\leefilterbeijing_A_1.jpg")
+toc
